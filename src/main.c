@@ -6,12 +6,12 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:36:45 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/10/30 19:50:05 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:01:07 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../mlx/mlx.h"
-#include "../so_long.h"
+#include "../headers/mlx.h"
+#include "../headers/so_long.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -25,7 +25,7 @@ int	start_game(char *map_name)
 	if (!(map_open(map_name, &particles)))
 		write (1, "Map Open Error\n", 16);
 	if (!(map_checker(&particles)))
-		write (1, "Map is rectengular\n", 20);
+		write (1, "Map Error\n", 11);
 	if (!(wall_control(&particles)))
 		write (1, "Map Wall Error\n", 16);
 	if (!(component_control(&particles)))

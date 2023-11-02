@@ -6,12 +6,12 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/10/30 20:19:04 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:07:12 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "../so_long.h"
+#include "../headers/so_long.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,11 +36,11 @@ int	map_name_checker(char *map_name)
 int	map_open(char *map_name, so_game *particles)
 {
 	int		fd;
-	char	map_split[1000];
+	char	map_split[10000];
 
 	fd = open(map_name, O_RDONLY);
-	read(fd, map_split, 1000);
-	particles->map = ft_split(map_split);
+	read(fd, map_split, 10000);
+	particles->map = ft_split(map_split, '\n');
 	if (!(particles->map))
 	{
 		close(fd);
@@ -124,7 +124,9 @@ int	component_control(so_game *particles)
 				exit++;
 			if (particles->map[i][j] == 'P')
 				player_start++;
-			if (particles->map[i][j] != '0' && particles->map[i][j] != '1' && particles->map[i][j] != 'P' && particles->map[i][j] != 'C' && particles->map[i][j] != 'E')
+			if (particles->map[i][j] != '0' && particles->map[i][j] != '1' &&
+			 particles->map[i][j] != 'P' &&
+			 particles->map[i][j] != 'C' && particles->map[i][j] != 'E')
 				return (0);
 			j++;
 		}
