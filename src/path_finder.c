@@ -6,12 +6,11 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 00:55:56 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 00:58:45 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
-#include <stdio.h>
 
 int path_finder(so_game *particles)
 {

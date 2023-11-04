@@ -6,22 +6,18 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 18:37:21 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 01:29:57 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "../headers/so_long.h"
 #include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
 
-int	control(so_game *particles, char *map_name)
+int	control(so_game *particles)
 {
-	if (!(map_name_checker(map_name)))
-		return (write (1, "Map Name Error\n", 16), 0);
-	if (!(map_open(map_name, particles)))
-		return (write (1, "Map Open Error\n", 16), 0);
+
 	if (!(map_checker(particles)))
 		return (write (1, "Map Error\n", 11), 0);
 	if (!(wall_control(particles)))
@@ -38,7 +34,7 @@ int	map_name_checker(char *map_name)
 	int		size;
 
 	size = ft_strlen(map_name);
-	if (size <= 4)
+	if (size < 4)
 		return (0);
 	size -= 4;
 	while (map_name[size])
@@ -56,6 +52,8 @@ int	map_open(char *map_name, so_game *particles)
 	char	map_split[10000];
 
 	fd = open(map_name, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	read(fd, map_split, 10000);
 	particles->map = ft_split(map_split, '\n');
 	if (!(particles->map))
