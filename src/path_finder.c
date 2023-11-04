@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 23:45:52 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 00:55:56 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,30 @@ void recursive_p(so_game *map, int y, int x)
 {
     if (map->copy_map[y][x + 1] == '0' || map->copy_map[y][x + 1] == 'C')
     {
-        map->copy_map[y][x + 1] = 'P';
         if (map->copy_map[y][x + 1] == 'C')
             map->collectibles--;
+        map->copy_map[y][x + 1] = 'P';
         recursive_p(map, y, x + 1);
     }
     if (map->copy_map[y][x - 1] == '0' || map->copy_map[y][x - 1] == 'C')
-    {
-        map->copy_map[y][x - 1] = 'P';
+    {   
         if (map->copy_map[y][x - 1] == 'C')
             map->collectibles--;
+        map->copy_map[y][x - 1] = 'P';
         recursive_p(map, y, x - 1);
     }
     if (map->copy_map[y + 1][x] == '0' || map->copy_map[y + 1][x] == 'C')
     {
-        map->copy_map[y + 1][x] = 'P';
         if (map->copy_map[y + 1][x] == 'C')
             map->collectibles--;
+        map->copy_map[y + 1][x] = 'P';
         recursive_p(map, y + 1, x);
     }
     if (map->copy_map[y - 1][x] == '0' || map->copy_map[y - 1][x] == 'C')
     {
-        map->copy_map[y - 1][x] = 'P';
         if (map->copy_map[y - 1][x] == 'C')
             map->collectibles--;
+        map->copy_map[y - 1][x] = 'P';
         recursive_p(map, y - 1, x);
     }
 }

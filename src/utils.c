@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:29:31 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 23:42:52 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 00:53:20 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,24 @@ void	ft_map_free(so_game *particles)
 {
 	int		i;
 
-	i = 0;
-	if (particles->map)
+	i = 0;		
+	while (particles->map[i])
 	{
-		while (particles->map[i])
-		{
-			free(particles->map[i]);
-			i++;
-		}
-		free(particles->map);
+		free(particles->map[i]);
+		i++;
 	}
+	free(particles->map);
 }
 
 void	ft_copymap_free(so_game *particles)
 {
 	int		i;
 
-	i = 0;
-	if (particles->copy_map)
+	i = 0;		
+	while (particles->copy_map[i])
 	{
-		while (particles->copy_map[i])
-		{
-			free(particles->copy_map[i]);
-			i++;
-		}
-		free(particles->copy_map);
+		free(particles->copy_map[i]);
+		i++;
 	}
+	free(particles->copy_map);
 }

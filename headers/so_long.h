@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:43:07 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 23:43:05 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 00:47:10 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct so_long
 }               so_game;
 
 //START
-void 	start_game(char *map_name);
+int 	start_game(char *map_name);
 
 //MAP
 int	    control(so_game *particles, char *map_name);
