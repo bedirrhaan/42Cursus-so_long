@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:02:12 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 17:15:26 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 23:46:26 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ char	**copy_two_dimensional_array(char **array)
 	int	j = 0;
 	char	**copy_array;
 
-	copy_array = (char **)malloc(sizeof(char *) * td_strlen(array));
+	copy_array = (char **)malloc(sizeof(char *) * td_strlen(array) + 1);
 	if (!copy_array)
 		return (NULL);
 	while (array[i])
 	{
 		j = 0;
-		copy_array[i] = (char *)malloc(sizeof(char *) * ft_strlen(array[i]));
+		copy_array[i] = (char *)malloc(sizeof(char *) * ft_strlen(array[i]) + 1);
 		if (!(copy_array[i]))
 			return (NULL);
 		while (array[i][j])

@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 17:56:36 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 18:37:21 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,23 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+int	control(so_game *particles, char *map_name)
+{
+	if (!(map_name_checker(map_name)))
+		return (write (1, "Map Name Error\n", 16), 0);
+	if (!(map_open(map_name, particles)))
+		return (write (1, "Map Open Error\n", 16), 0);
+	if (!(map_checker(particles)))
+		return (write (1, "Map Error\n", 11), 0);
+	if (!(wall_control(particles)))
+		return (write (1, "Map Wall Error\n", 16), 0);
+	if (!(component_control(particles)))
+		return (write (1, "Map Component Error\n", 21), 0);
+	if (!(path_finder(particles)))
+		return (write (1, "Player cannot reach exit\n", 26), 0);
+	return (1);
+}
 
 int	map_name_checker(char *map_name)
 {

@@ -6,21 +6,22 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 17:57:16 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 23:45:52 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
+#include <stdio.h>
 
 int path_finder(so_game *particles)
 {
     particles->copy_map = copy_two_dimensional_array(particles->map);
     recursive_p(particles, particles->player_y, particles->player_x);
     if (particles->collectibles != 0)
-        return (0);
+        return (ft_copymap_free(particles), 0);
     if (!(player_exit_control(particles)))
-        return (0);
-    return (1);
+        return (ft_copymap_free(particles), 0);
+    return (ft_copymap_free(particles), 1);
 }
 
 int player_exit_control(so_game *particles)
