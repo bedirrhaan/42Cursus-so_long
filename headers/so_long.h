@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:43:07 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/02 14:06:00 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:58:16 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,21 @@
 
 typedef struct so_long
 {
-    char    **map;
+    char    **map;    
     int     map_size;
+    int     collectibles;
+
+    // PATH FINDER
+    char    **copy_map;
+    int     player_x;
+    int     player_y;
+    int     player_e_x;
+    int     player_e_y;
+    
 }               so_game;
 
 //START
-int 	start_game(char *map_name);
+void 	start_game(char *map_name);
 
 //MAP
 int     map_open(char *map_name, so_game *particles);
@@ -36,5 +45,12 @@ size_t  ft_strlen(const char *str);
 size_t  td_strlen(char **two_dimensional_array);
 int	    ft_strchr(const char *s, int c);
 char    **ft_split(char const *s, char c);
+char	**copy_two_dimensional_array(char **array);
+
+//PATH FINDER
+int     path_finder(so_game *particles);
+int     player_exit_control(so_game *particles);
+void    recursive_p(so_game *map, int y, int x);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 14:02:12 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/02 14:05:05 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:15:26 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,31 @@ char	**ft_split(char const *s, char c)
 	}
 	strs[j] = 0;
 	return (strs);
+}
+
+char	**copy_two_dimensional_array(char **array)
+{
+	int	i = 0;
+	int	j = 0;
+	char	**copy_array;
+
+	copy_array = (char **)malloc(sizeof(char *) * td_strlen(array));
+	if (!copy_array)
+		return (NULL);
+	while (array[i])
+	{
+		j = 0;
+		copy_array[i] = (char *)malloc(sizeof(char *) * ft_strlen(array[i]));
+		if (!(copy_array[i]))
+			return (NULL);
+		while (array[i][j])
+		{
+			copy_array[i][j] = array[i][j];			
+			j++;
+		}
+		copy_array[i][j] = '\0';
+		i++;
+	}
+	copy_array[i] = NULL;
+	return (copy_array);
 }

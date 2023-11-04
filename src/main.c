@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:36:45 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/04 16:38:00 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:58:54 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,39 @@ int	control(so_game *particles, char *map_name)
 		return (write (1, "Map Wall Error\n", 16), 0);
 	if (!(component_control(particles)))
 		return (write (1, "Map Component Error\n", 21), 0);
+	if (!(path_finder(particles)))
+		return (write (1, "Player cannot reach exit\n", 26), 0);
 	return (1);
 }
 
-int	start_game(char *map_name)
+void	ft_free(so_game *particles)
 {
-	so_game	particles;
 	int		i;
 
-	control(&particles, map_name);
 	i = 0;
-	if (particles.map)
+	if (particles->map)
 	{
-		while (particles.map[i])
+		while (particles->map[i])
 		{
-			free(particles.map[i]);
+			free(particles->map[i]);
 			i++;
 		}
-		free(particles.map);
+		free(particles->map);
 	}
-	return (1);
+}
+
+void	start_game(char *map_name)
+{
+	so_game	particles;
+
+	if (!(control(&particles, map_name)))
+		ft_free(&particles);
 }
 
 int	main(int ac, char **av)
 {
 	if (ac != 2)
 		return (write (1, "Error\n", 5), 0);
-	if (!(start_game(av[1])))
-		return (0);
+	start_game(av[1]);
 	return (0);
 }

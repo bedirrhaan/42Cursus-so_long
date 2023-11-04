@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/02 14:07:12 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/04 17:56:36 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,11 @@ int	component_control(so_game *particles)
 {
 	int	i;
 	int	j;
-	int	collectibles;
 	int	exit;
 	int	player_start;
 
 	i = 0;
-	collectibles = 0;
+	particles->collectibles = 0;
 	exit = 0;
 	player_start = 0;
 	while (particles->map[i])
@@ -119,11 +118,19 @@ int	component_control(so_game *particles)
 		while (particles->map[i][j])
 		{
 			if (particles->map[i][j] == 'C')
-				collectibles++;
+				particles->collectibles++;
 			if (particles->map[i][j] == 'E')
+			{
+				particles->player_e_x = i;
+				particles->player_e_y = j;
 				exit++;
+			}
 			if (particles->map[i][j] == 'P')
+			{
 				player_start++;
+				particles->player_x = i;
+				particles->player_y = j;
+			}
 			if (particles->map[i][j] != '0' && particles->map[i][j] != '1' &&
 			 particles->map[i][j] != 'P' &&
 			 particles->map[i][j] != 'C' && particles->map[i][j] != 'E')
