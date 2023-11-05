@@ -1,4 +1,4 @@
-SRC = src/main.c src/map_controls.c src/utils.c src/utils2.c src/path_finder.c
+SRC = src/main.c src/map_controls.c src/utils.c src/utils2.c src/path_finder.c src/utils3.c src/hook.c
 
 INC = inc
 NAME = so_long

@@ -1,50 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 15:29:31 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 22:12:42 by bcopoglu         ###   ########.fr       */
+/*   Created: 2023/11/05 22:12:26 by bcopoglu          #+#    #+#             */
+/*   Updated: 2023/11/05 23:13:38 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "../headers/so_long.h"
+#include <stdlib.h>
 
-int	ft_strlen(const char *str)
+void	ft_map_free(so_game *particles)
+{
+	int		i;
+
+	i = 0;
+	while (particles->map[i])
+	{
+		free(particles->map[i]);
+		i++;
+	}
+	free(particles->map);
+}
+
+void	ft_copymap_free(so_game *particles)
+{
+	int		i;
+
+	i = 0;
+	while (particles->copy_map[i])
+	{
+		free(particles->copy_map[i]);
+		i++;
+	}
+	free(particles->copy_map);
+}
+
+void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
-		i++;
-	return (i);
-}
-
-int	td_strlen(char **two_dimensional_array)
-{
-	int	i;
-
-	i = 0;
-	while (two_dimensional_array[i])
-		i++;
-	return (i);
-}
-
-int	ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
 	{
-		if (s[i] == (char)c)
-			return (1);
+		write(1, &str[i], 1);
 		i++;
 	}
-	if (s[i] == (char)c)
-		return (1);
-	return (0);
 }
+
+void	ft_putnbr(int nbr)
+{
+	if (nbr > 9)
+	{
+		ft_putnbr(nbr / 10);
+	}
+	write (1, &"0123456789"[nbr % 10], 1);
+}
+

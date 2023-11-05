@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 16:31:24 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 23:18:52 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int path_finder(so_game *particles)
 {
     particles->copy_map = copy_two_dimensional_array(particles->map);
+    particles->collectibles_copy = particles->collectibles;
     recursive_p(particles, particles->player_y, particles->player_x);
-    if (particles->collectibles != 0)
+    if (particles->collectibles_copy != 0)
         return (ft_copymap_free(particles), 0);
     if (!(player_exit_control(particles)))
         return (ft_copymap_free(particles), 0);
@@ -46,28 +47,28 @@ void recursive_p(so_game *map, int y, int x)
     if (map->copy_map[y][x + 1] == '0' || map->copy_map[y][x + 1] == 'C')
     {
         if (map->copy_map[y][x + 1] == 'C')
-            map->collectibles--;
+            map->collectibles_copy--;
         map->copy_map[y][x + 1] = 'P';
         recursive_p(map, y, x + 1);
     }
     if (map->copy_map[y][x - 1] == '0' || map->copy_map[y][x - 1] == 'C')
-    {   
+    {
         if (map->copy_map[y][x - 1] == 'C')
-            map->collectibles--;
+            map->collectibles_copy--;
         map->copy_map[y][x - 1] = 'P';
         recursive_p(map, y, x - 1);
     }
     if (map->copy_map[y + 1][x] == '0' || map->copy_map[y + 1][x] == 'C')
     {
         if (map->copy_map[y + 1][x] == 'C')
-            map->collectibles--;
+            map->collectibles_copy--;
         map->copy_map[y + 1][x] = 'P';
         recursive_p(map, y + 1, x);
     }
     if (map->copy_map[y - 1][x] == '0' || map->copy_map[y - 1][x] == 'C')
     {
         if (map->copy_map[y - 1][x] == 'C')
-            map->collectibles--;
+            map->collectibles_copy--;
         map->copy_map[y - 1][x] = 'P';
         recursive_p(map, y - 1, x);
     }

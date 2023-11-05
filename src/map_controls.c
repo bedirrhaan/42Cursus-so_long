@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 01:29:57 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 23:34:47 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 int	control(so_game *particles)
 {
-
 	if (!(map_checker(particles)))
 		return (write (1, "Map Error\n", 11), 0);
 	if (!(wall_control(particles)))
@@ -70,6 +69,8 @@ int	map_checker(so_game *particles)
 	int	i;
 
 	i = 0;
+	particles->map_h = td_strlen(particles->map);
+	particles->map_w = ft_strlen(particles->map[0]);
 	while (particles->map[i + 2])
 	{
 		if (ft_strlen(particles->map[i]) != ft_strlen(particles->map[i + 1]))
@@ -118,15 +119,12 @@ int	wall_control(so_game *particles)
 
 int	component_control(so_game *particles)
 {
-	int	i;
+	int	i = 0;
 	int	j;
-	int	exit;
-	int	player_start;
+	int	exit = 0;
+	int	player_start = 0;
 
-	i = 0;
 	particles->collectibles = 0;
-	exit = 0;
-	player_start = 0;
 	while (particles->map[i])
 	{
 		j = 0;
@@ -154,7 +152,7 @@ int	component_control(so_game *particles)
 		}
 		i++;
 	}
-	if (exit == 1 && player_start == 1)
+	if (exit == 1 && player_start == 1 && particles->collectibles < 1)
 		return (1);
 	return (0);
 }
