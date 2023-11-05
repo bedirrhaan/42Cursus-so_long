@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 00:58:45 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/05 16:31:24 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,18 @@ int path_finder(so_game *particles)
 
 int player_exit_control(so_game *particles)
 {
+    int count;
+
+    count = 0;
     if (particles->copy_map[particles->player_e_x + 1][particles->player_e_y] != 'P')
-        return (0);
+        count++;
     if (particles->copy_map[particles->player_e_x - 1][particles->player_e_y] != 'P')
-        return (0);
+        count++;
     if (particles->copy_map[particles->player_e_x][particles->player_e_y + 1] != 'P')
-        return (0);
+        count++;
     if (particles->copy_map[particles->player_e_x][particles->player_e_y - 1] != 'P')
+        count++;
+    if (count == 4)
         return (0);
     return (1);
 }
