@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:43:07 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/06 18:08:48 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/06 20:26:55 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		object_image_up(t_game *g);
 //MAP
 int		control(t_game *particles);
 int		map_open(char *map_name, t_game *particles);
+int		map_fill(char *map_name, t_game *particles);
 int		map_checker(t_game *particles);
 int		map_name_checker(char *map_name);
 int		wall_control(t_game *particles);
@@ -80,7 +81,6 @@ int		ft_size_word(char const *s, char c, int i);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	**ft_free(char **strs, int j);
-
 
 //PATH FINDER
 int		path_finder(t_game *particles);
