@@ -6,27 +6,15 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:38:27 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/05 23:34:47 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/06 18:08:40 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "../headers/so_long.h"
+#include "../get_next_line/get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
-
-int	control(so_game *particles)
-{
-	if (!(map_checker(particles)))
-		return (write (1, "Map Error\n", 11), 0);
-	if (!(wall_control(particles)))
-		return (write (1, "Map Wall Error\n", 16), 0);
-	if (!(component_control(particles)))
-		return (write (1, "Map Component Error\n", 21), 0);
-	if (!(path_finder(particles)))
-		return (write (1, "Player cannot reach exit\n", 26), 0);
-	return (1);
-}
 
 int	map_name_checker(char *map_name)
 {
@@ -45,26 +33,7 @@ int	map_name_checker(char *map_name)
 	return (1);
 }
 
-int	map_open(char *map_name, so_game *particles)
-{
-	int		fd;
-	char	map_split[10000];
-
-	fd = open(map_name, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	read(fd, map_split, 10000);
-	particles->map = ft_split(map_split, '\n');
-	if (!(particles->map))
-	{
-		close(fd);
-		return (0);
-	}
-	close (fd);
-	return (1);
-}
-
-int	map_checker(so_game *particles)
+int	map_checker(t_game *particles)
 {
 	int	i;
 
@@ -82,7 +51,7 @@ int	map_checker(so_game *particles)
 	return (1);
 }
 
-int	wall_control(so_game *particles)
+int	wall_control(t_game *particles)
 {
 	int		i;
 	int		j;
@@ -117,13 +86,16 @@ int	wall_control(so_game *particles)
 	return (1);
 }
 
-int	component_control(so_game *particles)
+int	component_control(t_game *particles)
 {
-	int	i = 0;
+	int	i;
 	int	j;
-	int	exit = 0;
-	int	player_start = 0;
+	int	exit;
+	int	player_start;
 
+	i = 0;
+	exit = 0;
+	player_start = 0;
 	particles->collectibles = 0;
 	while (particles->map[i])
 	{
@@ -141,18 +113,18 @@ int	component_control(so_game *particles)
 			if (particles->map[i][j] == 'P')
 			{
 				player_start++;
-				particles->player_x = i;
-				particles->player_y = j;
+				particles->player_y = i;
+				particles->player_x = j;
 			}
 			if (particles->map[i][j] != '0' && particles->map[i][j] != '1' &&
-			 particles->map[i][j] != 'P' &&
-			 particles->map[i][j] != 'C' && particles->map[i][j] != 'E')
+			particles->map[i][j] != 'P' &&
+			particles->map[i][j] != 'C' && particles->map[i][j] != 'E')
 				return (0);
 			j++;
 		}
 		i++;
 	}
-	if (exit == 1 && player_start == 1 && particles->collectibles < 1)
+	if (exit == 1 && player_start == 1 && particles->collectibles != 0)
 		return (1);
 	return (0);
 }
