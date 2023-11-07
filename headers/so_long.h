@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:43:07 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/06 20:26:55 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:28:58 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		object_image_up(t_game *g);
 //MAP
 int		control(t_game *particles);
 int		map_open(char *map_name, t_game *particles);
-int		map_fill(char *map_name, t_game *particles);
+int		map_fill(t_game *particles, int fd);
 int		map_checker(t_game *particles);
 int		map_name_checker(char *map_name);
 int		wall_control(t_game *particles);

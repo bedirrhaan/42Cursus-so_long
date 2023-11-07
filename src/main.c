@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:36:45 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/06 20:27:37 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:28:51 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../headers/mlx.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 int	control(t_game *particles)
 {
@@ -38,7 +39,7 @@ int	mlx_main(t_game *particles)
 	else
 	{
 		particles->mlx_win = mlx_new_window(particles->mlx,
-				particles->map_w * 32, particles->map_h * 32, "AnimeGirl");
+				particles->map_w * 32, particles->map_h * 32, "CakmaZelda");
 		if (!particles->mlx_win)
 			return (free(particles->mlx), 0);
 		mlx_key_hook(particles->mlx_win, player_movement, particles);
@@ -52,11 +53,13 @@ int	mlx_main(t_game *particles)
 int	start_game(char *map_name)
 {
 	t_game	particles;
+	int		fd;
 
 	particles.another = 0;
+	fd = open(map_name, O_RDONLY);
 	if (!(map_name_checker(map_name)))
 		return (write (1, "Map Name Error\n", 16), 0);
-	if (!(map_fill(map_name, &particles)))
+	if (!(map_fill(&particles, fd)))
 		return (write (1, "Map Open Error\n", 16), 0);
 	if (!(calculate_map(&particles)))
 		return (write (1, "Map Create Error\n", 18), 0);

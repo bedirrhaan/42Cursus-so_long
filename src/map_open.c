@@ -6,13 +6,14 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:58:12 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/06 21:10:41 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 03:28:43 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "../headers/so_long.h"
 #include "../get_next_line/get_next_line.h"
+#include <stdio.h>
 
 int	map_name_checker(char *map_name)
 {
@@ -31,13 +32,11 @@ int	map_name_checker(char *map_name)
 	return (1);
 }
 
-int	map_fill(char *map_name, t_game *particles)
+int	map_fill(t_game *particles, int fd)
 {
-	int		fd;
 	char	*line;
 	char	*swap;
 
-	fd = open(map_name, O_RDONLY);
 	line = get_next_line(fd);
 	if (!line || fd < 0)
 		return (0);
@@ -54,7 +53,7 @@ int	map_fill(char *map_name, t_game *particles)
 		swap = ft_strjoin(particles->map_swap, line);
 		if (!swap || ft_strlen(line) < 4)
 			return (free(particles->map_swap), 0);
-		free(particles->map_swap),
+		free(particles->map_swap);
 		particles->map_swap = swap;
 	}
 	return (1);
