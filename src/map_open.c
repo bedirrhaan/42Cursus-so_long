@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:58:12 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/07 03:28:43 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:07:13 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@ int	map_fill(t_game *particles, int fd)
 		line = get_next_line(fd);
 		if (!line || line[0] == '\0')
 			break ;
-		free(line);
 		swap = ft_strjoin(particles->map_swap, line);
-		if (!swap || ft_strlen(line) < 4)
+
+		free(line);
+
+		if (!swap || ft_strlen(particles->map_swap) < 4)
 			return (free(particles->map_swap), 0);
 		free(particles->map_swap);
 		particles->map_swap = swap;

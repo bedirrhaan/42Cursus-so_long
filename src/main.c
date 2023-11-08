@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 15:36:45 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/07 03:28:51 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:54:37 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int	mlx_main(t_game *particles)
 				particles->map_w * 32, particles->map_h * 32, "CakmaZelda");
 		if (!particles->mlx_win)
 			return (free(particles->mlx), 0);
-		mlx_key_hook(particles->mlx_win, player_movement, particles);
+		mlx_hook(particles->mlx_win, 13, 0,player_movement, particles);
+		mlx_hook(particles->mlx_win, 0, 0,player_movement, particles);
+		mlx_hook(particles->mlx_win, 1, 0,player_movement, particles);
+		mlx_hook(particles->mlx_win, 2, 0,player_movement, particles);
 		mlx_hook(particles->mlx_win, 17, 0, game_exit, particles);
 		mlx_loop_hook(particles->mlx, map_update, particles);
 		mlx_loop(particles->mlx);
@@ -60,7 +63,7 @@ int	start_game(char *map_name)
 	if (!(map_name_checker(map_name)))
 		return (write (1, "Map Name Error\n", 16), 0);
 	if (!(map_fill(&particles, fd)))
-		return (write (1, "Map Open Error\n", 16), 0);
+		return (write (1, "Map Open Error\n", 16), 1);
 	if (!(calculate_map(&particles)))
 		return (write (1, "Map Create Error\n", 18), 0);
 	if (!(control(&particles)))
@@ -72,6 +75,7 @@ int	start_game(char *map_name)
 
 int	main(int ac, char **av)
 {
+
 	if (ac != 2)
 		return (write (1, "Error\n", 5), 0);
 	if (!(start_game(av[1])))

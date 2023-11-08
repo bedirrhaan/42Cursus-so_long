@@ -6,7 +6,7 @@
 /*   By: bcopoglu <bcopoglu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:14:05 by bcopoglu          #+#    #+#             */
-/*   Updated: 2023/11/07 02:46:44 by bcopoglu         ###   ########.fr       */
+/*   Updated: 2023/11/07 17:07:35 by bcopoglu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	player_exit_control(t_game *particles)
 
 	count = 0;
 	if (particles->copy_map[particles->player_e_x + 1][particles->player_e_y]
-		!= 'P' && particles->copy_map[particles->player_e_x + 1][particles->player_e_y] != 'E')
+		!= 'P' && particles->copy_map[particles->player_e_x + 1][particles->player_e_y] != 'E' && particles->copy_map[particles->player_e_x + 1][particles->player_e_y] != '1')
 		count++;
 	if (particles->copy_map[particles->player_e_x - 1][particles->player_e_y]
-		!= 'P' && particles->copy_map[particles->player_e_x - 1][particles->player_e_y] != 'E')
+		!= 'P' && particles->copy_map[particles->player_e_x - 1][particles->player_e_y] != 'E' && particles->copy_map[particles->player_e_x + 1][particles->player_e_y] != '1')
 		count++;
 	if (particles->copy_map[particles->player_e_x][particles->player_e_y + 1]
-		!= 'P' && particles->copy_map[particles->player_e_x][particles->player_e_y + 1] != 'E')
+		!= 'P' && particles->copy_map[particles->player_e_x][particles->player_e_y + 1] != 'E' && particles->copy_map[particles->player_e_x][particles->player_e_y + 1] != '1')
 		count++;
 	if (particles->copy_map[particles->player_e_x][particles->player_e_y - 1]
-		!= 'P' && particles->copy_map[particles->player_e_x][particles->player_e_y - 1] != 'E')
+		!= 'P' && particles->copy_map[particles->player_e_x][particles->player_e_y - 1] != 'E' && particles->copy_map[particles->player_e_x][particles->player_e_y - 1] != '1')
 		count++;
 	if (count == 4)
 		return (0);
@@ -50,7 +50,8 @@ static void	c_control(t_game *map, int y, int x)
 {
 	if (map->copy_map[y][x] == 'C')
 		map->collectibles_copy--;
-	map->copy_map[y][x] = 'P';
+	if (map->copy_map[y][x] != 'E')
+		map->copy_map[y][x] = 'P';
 }
 
 void	recursive_p(t_game *map, int y, int x)
@@ -60,7 +61,7 @@ void	recursive_p(t_game *map, int y, int x)
 		c_control(map, y, x + 1);
 		recursive_p(map, y, x + 1);
 	}
-	if (map->copy_map[y][x - 1] == '0' || map->copy_map[y][x - 1] == 'C' || map ->copy_map[y][x - 1] == 'E')
+	if (map->copy_map[y][x - 1] == '0' || map->copy_map[y][x - 1] == 'C' || map->copy_map[y][x - 1] == 'E')
 	{
 		c_control(map, y, x - 1);
 		recursive_p(map, y, x - 1);
