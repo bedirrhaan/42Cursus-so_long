@@ -28,6 +28,8 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	while (++j < word)
 	{
+		if (s[i] == '\n' && s[i + 1] == '\n')
+			return (ft_free(strs, j));
 		while (s[i] == c)
 			i++;
 		strs[j] = ft_substr(s, i, ft_size_word(s, c, i));
