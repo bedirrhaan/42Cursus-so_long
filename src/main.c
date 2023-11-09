@@ -42,10 +42,10 @@ int	mlx_main(t_game *particles)
 				particles->map_w * 32, particles->map_h * 32, "CakmaZelda");
 		if (!particles->mlx_win)
 			return (free(particles->mlx), 0);
-		mlx_hook(particles->mlx_win, 13, 0,player_movement, particles);
-		mlx_hook(particles->mlx_win, 0, 0,player_movement, particles);
-		mlx_hook(particles->mlx_win, 1, 0,player_movement, particles);
-		mlx_hook(particles->mlx_win, 2, 0,player_movement, particles);
+		mlx_hook(particles->mlx_win, 13, 0, player_movement, particles);
+		mlx_hook(particles->mlx_win, 0, 0, player_movement, particles);
+		mlx_hook(particles->mlx_win, 1, 0, player_movement, particles);
+		mlx_hook(particles->mlx_win, 2, 0, player_movement, particles);
 		mlx_hook(particles->mlx_win, 17, 0, game_exit, particles);
 		mlx_loop_hook(particles->mlx, map_update, particles);
 		mlx_loop(particles->mlx);
@@ -75,7 +75,6 @@ int	start_game(char *map_name)
 
 int	main(int ac, char **av)
 {
-
 	if (ac != 2)
 		return (write (1, "Error\n", 5), 0);
 	if (!(start_game(av[1])))

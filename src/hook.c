@@ -52,7 +52,7 @@ int	game_exit(t_game *game)
 
 void	player_object_update(t_game *game)
 {
-	if (game->collectibles == 0
+	if (game->collectibles == 1
 		&& game->map[game->player_y][game->player_x] == 'E')
 		game_exit(game);
 	else if (game->map[game->player_y][game->player_x] == 'C')

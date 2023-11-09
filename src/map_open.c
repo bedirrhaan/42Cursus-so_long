@@ -50,9 +50,7 @@ int	map_fill(t_game *particles, int fd)
 		if (!line || line[0] == '\0')
 			break ;
 		swap = ft_strjoin(particles->map_swap, line);
-
 		free(line);
-
 		if (!swap || ft_strlen(particles->map_swap) < 4)
 			return (free(particles->map_swap), 0);
 		free(particles->map_swap);

@@ -23,7 +23,7 @@ int	map_checker(t_game *particles)
 	i = 0;
 	particles->map_h = td_strlen(particles->map);
 	particles->map_w = ft_strlen(particles->map[0]);
-	while (particles->map[i + 2])
+	while (particles->map[i + 1])
 	{
 		if (ft_strlen(particles->map[i]) != ft_strlen(particles->map[i + 1]))
 			return (0);
@@ -87,7 +87,7 @@ static int	component_while(t_game *particles,
 	j = -1;
 	while (particles->map[i][++j])
 	{
-		if (particles->map[i][j] == 'C')
+		if (particles->map[i][j] == 'C' || particles->map[i][j] == 'E')
 			particles->collectibles++;
 		if (particles->map[i][j] == 'E')
 		{
